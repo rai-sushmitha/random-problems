@@ -30,3 +30,20 @@ class Solution:
                                 q.append(n)
                     res += 1
         return res
+
+# very efficient solution 
+class Solution:
+     def numIslands(self, grid: List[List[str]]) -> int:
+        def foo(idx,idy):
+            grid[idx][idy]='0'
+            if idx-1>=0 and grid[idx-1][idy]=='1': foo(idx-1,idy)
+            if idx+1<len(grid) and grid[idx+1][idy]=='1': foo(idx+1,idy)
+            if idy-1>=0 and grid[idx][idy-1]=='1': foo(idx,idy-1)
+            if idy+1<len(grid[0]) and grid[idx][idy+1]=='1': foo(idx,idy+1)
+        count=0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]=='1':
+                    foo(i,j)
+                    count+=1
+        return count
